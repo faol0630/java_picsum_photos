@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">picsumphotos</string>
+    <string name="load">Load</string>
+    <string name="author">Author</string>
+    <string name="id">Id</string>
+    <string name="image">image</string>
+</resources>

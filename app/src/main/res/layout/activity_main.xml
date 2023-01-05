@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#909090"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.MainActivity">
+    
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RVActivity"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:id="@+id/btnLoad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        app:strokeColor="#3F51B5"
+        app:strokeWidth="2dp"
+        app:cornerRadius="12dp"
+        app:rippleColor="#FFC107"
+        app:elevation="10dp"
+        android:padding="10dp"
+        android:text="@string/load"
+        android:textSize="16sp"
+        />
+    
+    
+</LinearLayout>
