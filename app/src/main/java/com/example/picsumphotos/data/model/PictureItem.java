@@ -1,7 +1,9 @@
 package com.example.picsumphotos.data.model;
 
 
-public class PictureItem {
+import java.io.Serializable;
+
+public class PictureItem implements Serializable {
 
     private String id;
 
@@ -9,13 +11,26 @@ public class PictureItem {
 
     private String image_url;
 
+    private Integer width;
+
+    private Integer height;
+
     //constructor
 
-    public PictureItem(String id, String author, String image_url) {
+    public PictureItem(String id, String author, String image_url, Integer width, Integer height) {
         this.id = id;
         this.author = author;
         this.image_url = image_url;
+        this.width = width;
+        this.height = height;
     }
+
+//    public PictureItem(String id, String author, String image_url) {
+//        this.id = id;
+//        this.author = author;
+//        this.image_url = image_url;
+//    }
+
 
     //getter and setter
     //(para ser usados en mapper, fromModel)
@@ -42,6 +57,22 @@ public class PictureItem {
 
     public void setImage_url(String image_url) {
         this.image_url = image_url;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 }
 

@@ -6,8 +6,8 @@ import com.example.picsumphotos.data.model.PictureItem;
 import com.example.picsumphotos.data.model.PictureItemDTO;
 import com.example.picsumphotos.data.model.PictureItemEntity;
 import com.example.picsumphotos.data.remote.RemoteDataAccess;
-import com.example.picsumphotos.mapper.PictureItemDTOMapper;
-import com.example.picsumphotos.mapper.PictureItemEntityMapper;
+import com.example.picsumphotos.repository.mapper.PictureItemDTOMapper;
+import com.example.picsumphotos.repository.mapper.PictureItemEntityMapper;
 import com.example.picsumphotos.viewmodel.ExecutorSupplier;
 
 import java.util.List;

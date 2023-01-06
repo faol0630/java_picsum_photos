@@ -1,4 +1,4 @@
-package com.example.picsumphotos.mapper;
+package com.example.picsumphotos.repository.mapper;
 
 import com.example.picsumphotos.data.model.PictureItem;
 import com.example.picsumphotos.data.model.PictureItemDTO;
@@ -20,7 +20,7 @@ public class PictureItemDTOMapper implements ObjectMapper<PictureItemDTO, Pictur
 
     @Override
     public PictureItem toModel(PictureItemDTO object) {
-        return new PictureItem(object.getId(), object.getAuthor(), object.getImage_url());
+        return new PictureItem(object.getId(), object.getAuthor(), object.getImage_url(), object.getWidth(), object.getHeight());
     }
 
     @Override
@@ -29,6 +29,8 @@ public class PictureItemDTOMapper implements ObjectMapper<PictureItemDTO, Pictur
         pictureItemDTO.setId(object.getId());
         pictureItemDTO.setAuthor(object.getAuthor());
         pictureItemDTO.setImage_url(object.getImage_url());
+        pictureItemDTO.setWidth(object.getWidth());
+        pictureItemDTO.setHeight(object.getHeight());
         return pictureItemDTO;
     }
 

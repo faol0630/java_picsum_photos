@@ -1,4 +1,4 @@
-package com.example.picsumphotos.mapper;
+package com.example.picsumphotos.repository.mapper;
 
 import com.example.picsumphotos.data.model.PictureItem;
 import com.example.picsumphotos.data.model.PictureItemEntity;
@@ -20,12 +20,12 @@ public class PictureItemEntityMapper implements ObjectMapper<PictureItemEntity, 
 
     @Override
     public PictureItem toModel(PictureItemEntity object) {
-        return new PictureItem(object.getId(), object.getAuthor(), object.getImage_url());
+        return new PictureItem(object.getId(), object.getAuthor(), object.getImage_url(), object.getWidth(), object.getWidth());
     }
 
     @Override
     public PictureItemEntity fromModel(PictureItem object) {
-        return new PictureItemEntity(object.getId(), object.getAuthor(), object.getImage_url()) ;
+        return new PictureItemEntity(object.getId(), object.getAuthor(), object.getImage_url(), object.getWidth(), object.getHeight()) ;
     }
 
     //minimo tener minSdk 24 para lo siguiente:

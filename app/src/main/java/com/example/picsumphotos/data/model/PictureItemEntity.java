@@ -20,11 +20,19 @@ public class PictureItemEntity {
     @ColumnInfo(name = "image_url")
     private String image_url;
 
+    @ColumnInfo(name = "width")
+    private Integer width;
+
+    @ColumnInfo(name = "height")
+    private Integer height;
+
     //constructor
-    public PictureItemEntity(String id, String author, String image_url) {
+    public PictureItemEntity(String id, String author, String image_url, Integer width, Integer height) {
         this.id = id;
         this.author = author;
         this.image_url = image_url;
+        this.width = width;
+        this.height = height;
     }
 
     //getter and setter
@@ -51,5 +59,21 @@ public class PictureItemEntity {
 
     public void setImage_url(String image_url) {
         this.image_url = image_url;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 }

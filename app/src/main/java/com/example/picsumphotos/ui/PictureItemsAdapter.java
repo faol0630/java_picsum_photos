@@ -27,12 +27,26 @@ import butterknife.ButterKnife;
 public class PictureItemsAdapter extends RecyclerView.Adapter<PictureItemsAdapter.ViewHolder> {
 
     private List<PictureItem> pictures = new ArrayList<>();
+    //-------------------------------------------------------------
+    private OnClickItemInterface onClickItemInterface;
+
+    public interface OnClickItemInterface {
+
+        void onClickItem(PictureItem pictureItem);
+
+    }
+
+    public void setOnClickItemInterface(OnClickItemInterface onClickItemInterface){
+        this.onClickItemInterface = onClickItemInterface;
+    }
+    //-----------------------------------------------------------
 
 //    public PictureItemsAdapter(List<PictureItemDTO> pictures) {
 //        this.pictures = pictures;
 //    }
 
-    public PictureItemsAdapter() {
+    public PictureItemsAdapter(OnClickItemInterface onClickItemInterface) {
+        this.onClickItemInterface = onClickItemInterface;
     }
 
     public void UpdatePictures(List<PictureItem> newPictures){
@@ -55,6 +69,13 @@ public class PictureItemsAdapter extends RecyclerView.Adapter<PictureItemsAdapte
         holder.tvItemAuthor.setText(pictures.get(position).getAuthor());
         Glide.with(holder.itemView.getContext()).
                 load(pictures.get(position).getImage_url()).into(holder.ivItem);
+        //click en cada item del recyclerView
+        holder.itemView.getRootView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickItemInterface.onClickItem(pictures.get(position));
+            }
+        });
     }
 
     @Override

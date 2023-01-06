@@ -4,4 +4,8 @@
     <string name="author">Author</string>
     <string name="id">Id</string>
     <string name="image">image</string>
+    <string name="height">Height</string>
+    <string name="width">Width</string>
+    <string name="author1">Author</string>
+    <string name="id1">Id</string>
 </resources>

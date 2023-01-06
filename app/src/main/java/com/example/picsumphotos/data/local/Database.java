@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase;
 
 import com.example.picsumphotos.data.model.PictureItemEntity;
 
-@androidx.room.Database(entities = {PictureItemEntity.class}, version = 1)
+@androidx.room.Database(entities = {PictureItemEntity.class}, version = 2)
 public abstract class Database extends RoomDatabase {
 
     //al ser abstracta no se necesita un private constructor
@@ -23,6 +23,7 @@ public abstract class Database extends RoomDatabase {
             databaseInstance = Room
                     .databaseBuilder(context, Database.class, "picture_items_database")
                     .allowMainThreadQueries() //solo para pruebas para que no de error
+                    .fallbackToDestructiveMigration() //para que no truene al presionar el boton load.
                     .build();
         }
         return databaseInstance;

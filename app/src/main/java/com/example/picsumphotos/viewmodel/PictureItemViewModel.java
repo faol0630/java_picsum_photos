@@ -10,8 +10,8 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.picsumphotos.data.local.Database;
 import com.example.picsumphotos.data.model.PictureItem;
 import com.example.picsumphotos.data.remote.RemoteDataAccess;
-import com.example.picsumphotos.mapper.PictureItemDTOMapper;
-import com.example.picsumphotos.mapper.PictureItemEntityMapper;
+import com.example.picsumphotos.repository.mapper.PictureItemDTOMapper;
+import com.example.picsumphotos.repository.mapper.PictureItemEntityMapper;
 import com.example.picsumphotos.repository.AsyncTaskReceiver;
 import com.example.picsumphotos.repository.PictureItemsRepository;
 

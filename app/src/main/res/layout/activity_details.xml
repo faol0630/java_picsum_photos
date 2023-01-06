@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="6dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="#414141"
+    android:layout_height="match_parent"
+    tools:context=".ui.DetailsActivity">
+
+    <ImageView
+        android:id="@+id/ivDetails"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"/>
+
+    <LinearLayout
+        android:layout_margin="6dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/id1"
+            android:padding="6dp"
+            android:textColor="#FFC107"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvDetailsId"
+            android:text="@string/id1"
+            android:padding="6dp"
+            android:textColor="#8BC34A"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="6dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/author1"
+            android:textColor="#FFC107"
+            android:padding="6dp"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvDetailsAuthor"
+            android:text="@string/author1"
+            android:padding="6dp"
+            android:textColor="#8BC34A"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="6dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/width"
+            android:textColor="#FFC107"
+            android:padding="6dp"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvDetailsWidth"
+            android:text="@string/width"
+            android:padding="6dp"
+            android:textColor="#8BC34A"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="6dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/height"
+            android:textColor="#FFC107"
+            android:padding="6dp"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvDetailsHeight"
+            android:text="@string/height"
+            android:padding="6dp"
+            android:textColor="#8BC34A"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

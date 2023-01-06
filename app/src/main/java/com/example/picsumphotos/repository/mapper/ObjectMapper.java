@@ -1,4 +1,4 @@
-package com.example.picsumphotos.mapper;
+package com.example.picsumphotos.repository.mapper;
 
 import java.util.List;
 
