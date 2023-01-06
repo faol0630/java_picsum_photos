@@ -1,5 +1,6 @@
 package com.example.picsumphotos.data.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -27,7 +28,7 @@ public class PictureItemEntity {
     private Integer height;
 
     //constructor
-    public PictureItemEntity(String id, String author, String image_url, Integer width, Integer height) {
+    public PictureItemEntity(@NonNull String id, String author, String image_url, Integer width, Integer height) {
         this.id = id;
         this.author = author;
         this.image_url = image_url;
@@ -37,11 +38,12 @@ public class PictureItemEntity {
 
     //getter and setter
 
+    @NonNull
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 

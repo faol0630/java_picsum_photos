@@ -12,9 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.picsumphotos.R;
 import com.example.picsumphotos.data.model.PictureItem;
-import com.example.picsumphotos.data.model.PictureItemDTO;
-import com.example.picsumphotos.data.remote.PicturesItemDAO;
-import com.example.picsumphotos.viewmodel.PictureItemViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +25,7 @@ public class PictureItemsAdapter extends RecyclerView.Adapter<PictureItemsAdapte
 
     private List<PictureItem> pictures = new ArrayList<>();
     //-------------------------------------------------------------
-    private OnClickItemInterface onClickItemInterface;
+    private final OnClickItemInterface onClickItemInterface;
 
     public interface OnClickItemInterface {
 
@@ -36,24 +33,17 @@ public class PictureItemsAdapter extends RecyclerView.Adapter<PictureItemsAdapte
 
     }
 
-    public void setOnClickItemInterface(OnClickItemInterface onClickItemInterface){
-        this.onClickItemInterface = onClickItemInterface;
-    }
     //-----------------------------------------------------------
-
-//    public PictureItemsAdapter(List<PictureItemDTO> pictures) {
-//        this.pictures = pictures;
-//    }
 
     public PictureItemsAdapter(OnClickItemInterface onClickItemInterface) {
         this.onClickItemInterface = onClickItemInterface;
     }
 
-    public void UpdatePictures(List<PictureItem> newPictures){
-        pictures.clear();
-        pictures.addAll(newPictures);
-        notifyDataSetChanged();
-    }
+//    public void UpdatePictures(List<PictureItem> newPictures){
+//        pictures.clear();
+//        pictures.addAll(newPictures);
+//        notifyDataSetChanged();
+//    }
 
     @NonNull
     @Override
@@ -70,12 +60,7 @@ public class PictureItemsAdapter extends RecyclerView.Adapter<PictureItemsAdapte
         Glide.with(holder.itemView.getContext()).
                 load(pictures.get(position).getImage_url()).into(holder.ivItem);
         //click en cada item del recyclerView
-        holder.itemView.getRootView().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickItemInterface.onClickItem(pictures.get(position));
-            }
-        });
+        holder.itemView.getRootView().setOnClickListener(v -> onClickItemInterface.onClickItem(pictures.get(position)));
     }
 
     @Override
@@ -88,7 +73,7 @@ public class PictureItemsAdapter extends RecyclerView.Adapter<PictureItemsAdapte
         notifyDataSetChanged();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder{
 
         @BindView(R.id.TVItemId)
         TextView tvItemId;
@@ -106,15 +91,5 @@ public class PictureItemsAdapter extends RecyclerView.Adapter<PictureItemsAdapte
 //            tvItemAuthor = itemView.findViewById(R.id.TVItemAuthor);
 //            ivItem = itemView.findViewById(R.id.IVitem);
         }
-
-//        void bind(PictureItemDTO pictureItemDTO){
-//            tvItemId.setText(pictureItemDTO.getId());
-//            tvItemAuthor.setText(pictureItemDTO.getAuthor());
-//            Glide.with(itemView.getContext())
-//                    .setDefaultRequestOptions(pictures.get())
-//                    .load(itemView.get)
-//                    .into(itemView);
-//            //aca se usaria Glide para la imagen
-//        }
     }
 }

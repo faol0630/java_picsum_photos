@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements PictureItemsAdapt
         pictureItemViewModel = new ViewModelProvider(this).get(PictureItemViewModel.class);
 
         pictureItemViewModel.getPicturesLiveData().observe(this, pictureItems -> {
-            Log.d("fco_test", pictureItems.toString() + " got it in mainActivity");
             adapter.setPictures(pictureItems);
         });
 

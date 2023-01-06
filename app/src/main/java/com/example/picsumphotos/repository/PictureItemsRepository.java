@@ -1,6 +1,8 @@
 package com.example.picsumphotos.repository;
 
 
+import androidx.annotation.NonNull;
+
 import com.example.picsumphotos.data.local.Database;
 import com.example.picsumphotos.data.model.PictureItem;
 import com.example.picsumphotos.data.model.PictureItemDTO;
@@ -18,10 +20,10 @@ import retrofit2.Response;
 
 public class PictureItemsRepository {
 
-    private Database localStorage; //Room
-    private RemoteDataAccess remote; //Retrofit
-    private PictureItemEntityMapper entityMapper;
-    private PictureItemDTOMapper dtoMapper;
+    private final Database localStorage; //Room
+    private final RemoteDataAccess remote; //Retrofit
+    private final PictureItemEntityMapper entityMapper;
+    private final PictureItemDTOMapper dtoMapper;
 
     //constructor
     public PictureItemsRepository(Database localStorage, RemoteDataAccess remote, PictureItemEntityMapper entityMapper, PictureItemDTOMapper dtoMapper) {
@@ -33,31 +35,30 @@ public class PictureItemsRepository {
 
     public void getPictureItems(AsyncTaskReceiver<List<PictureItem>> callback) {
 
-        ExecutorSupplier.getInstance().execute(new Runnable() {
-            @Override
-            public void run() {
-                List<PictureItemEntity> localItems = localStorage.getDAO().getAllRoomPictureItems();
-                callback.onSuccess(entityMapper.toModel(localItems)); //del entity al neutro
-            }
+        //llamado de room:
+        ExecutorSupplier.getInstance().execute(() -> {
+            //lista del entity
+            List<PictureItemEntity> localItems = localStorage.getDAO().getAllRoomPictureItems();
+            //En caso de conexion exitosa, del entity al neutro
+            callback.onSuccess(entityMapper.toModel(localItems));
         });
 
-
+        //llamado a la lista del DTO remote
         Call<List<PictureItemDTO>> call = remote.getPicturesItemDAOFromRemoteDataAccess().getInterfacePictureItems();
 
         call.enqueue(new Callback<List<PictureItemDTO>>() {
             @Override
-            public void onResponse(Call<List<PictureItemDTO>> call, Response<List<PictureItemDTO>> response) {
+            public void onResponse(@NonNull Call<List<PictureItemDTO>> call, @NonNull Response<List<PictureItemDTO>> response) {
                 if (response.body() != null && !response.body().isEmpty()) {
 
-                    List<PictureItem> items = dtoMapper.toModel(response.body()); //del DTO a neutro
+                    //del DTO a neutro
+                    List<PictureItem> items = dtoMapper.toModel(response.body());
 
                     callback.onSuccess(items); //del DTO al neutro
-                    ExecutorSupplier.getInstance().execute(new Runnable() {
-                        @Override
-                        public void run() {
-                            //salvar toda la info que viene de retrofit en Room:
-                            localStorage.getDAO().saveAllRoomPictureItems(entityMapper.fromModel(items)); //se deben salvar en modo Entity
-                        }
+                    ExecutorSupplier.getInstance().execute(() -> {
+                        //salvar toda la info que viene de retrofit en Room:
+                        //convirtiendo de neutro a entity:
+                        localStorage.getDAO().saveAllRoomPictureItems(entityMapper.fromModel(items)); //se deben salvar en modo Entity
                     });
 
 
@@ -65,7 +66,7 @@ public class PictureItemsRepository {
             }
 
             @Override
-            public void onFailure(Call<List<PictureItemDTO>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<PictureItemDTO>> call, @NonNull Throwable t) {
                 callback.onFailure(t);
             }
         });

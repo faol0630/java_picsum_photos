@@ -19,7 +19,7 @@ import java.util.List;
 
 public class PictureItemViewModel extends AndroidViewModel {
 
-    private PictureItemsRepository repository;
+    private final PictureItemsRepository repository;
 
     public PictureItemViewModel(@NonNull Application application) {
         super(application);
@@ -31,13 +31,15 @@ public class PictureItemViewModel extends AndroidViewModel {
         );
     }
 
-    private MutableLiveData<List<PictureItem>> itemLiveData = new MutableLiveData<>();
+    private final MutableLiveData<List<PictureItem>> itemLiveData = new MutableLiveData<>();//este se usa para el postValue
 
     public LiveData<List<PictureItem>> getPicturesLiveData(){ //sobre esto se monta el observer en el activity
         return itemLiveData;
     }
 
     public void requestPictureItems(){ //este es el metodo que se llama dentro de onCreate en el activity
+        //dentro del getPicturesItems de repository está room incluido.Por lo tanto con este llamado
+        //se llaman las dos cosas.Por eso aca no hay logica de Room.
         repository.getPictureItems(new AsyncTaskReceiver<List<PictureItem>>() {
             @Override
             public void onSuccess(List<PictureItem> result) {
@@ -50,6 +52,9 @@ public class PictureItemViewModel extends AndroidViewModel {
             }
         });
     }
+
+    //aca no hay nada de Room porque toda la logica está en repository.
+    //aca solo está lo que viene de Retrofit.
 }
 
 //AndroidViewModel porque se necesita pasar por parametro al context(application).
