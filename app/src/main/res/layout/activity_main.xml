@@ -8,53 +8,59 @@
     android:orientation="vertical"
     tools:context=".ui.MainActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RVActivity"
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"/>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/RVActivity"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_weight="1" />-->
+
+<!--    <LinearLayout-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
 
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnDeleteLocalDB"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_margin="6dp"
-            android:padding="5dp"
-            android:text="@string/delete_local_db"
-            android:textSize="12sp"
-            android:textColor="#3F51B5"
-            app:cornerRadius="12dp"
-            app:elevation="10dp"
-            app:rippleColor="#FFC107"
-            app:strokeColor="#3F51B5"
-            app:strokeWidth="2dp" />
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/btnDeleteLocalDB"-->
+<!--            style="@style/Widget.MaterialComponents.Button.OutlinedButton"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="6dp"-->
+<!--            android:padding="5dp"-->
+<!--            android:text="@string/delete_local_db"-->
+<!--            android:textSize="12sp"-->
+<!--            android:textColor="#3F51B5"-->
+<!--            app:cornerRadius="12dp"-->
+<!--            app:elevation="10dp"-->
+<!--            app:rippleColor="#FFC107"-->
+<!--            app:strokeColor="#3F51B5"-->
+<!--            app:strokeWidth="2dp" />-->
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnReload"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_margin="6dp"
-            android:padding="5dp"
-            android:text="@string/reload_from_web"
-            android:textSize="12sp"
-            android:textColor="#E91E63"
-            app:cornerRadius="12dp"
-            app:elevation="10dp"
-            app:rippleColor="#FFC107"
-            app:strokeColor="#E91E63"
-            app:strokeWidth="2dp" />
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/btnReload"-->
+<!--            style="@style/Widget.MaterialComponents.Button.OutlinedButton"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="6dp"-->
+<!--            android:padding="5dp"-->
+<!--            android:text="@string/reload_from_web"-->
+<!--            android:textSize="12sp"-->
+<!--            android:textColor="#E91E63"-->
+<!--            app:cornerRadius="12dp"-->
+<!--            app:elevation="10dp"-->
+<!--            app:rippleColor="#FFC107"-->
+<!--            app:strokeColor="#E91E63"-->
+<!--            app:strokeWidth="2dp" />-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
 
 </LinearLayout>

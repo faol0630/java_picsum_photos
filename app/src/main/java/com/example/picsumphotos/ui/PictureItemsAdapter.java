@@ -1,5 +1,6 @@
 package com.example.picsumphotos.ui;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ public class PictureItemsAdapter extends RecyclerView.Adapter<PictureItemsAdapte
     public PictureItemsAdapter(OnClickItemInterface onClickItemInterface) {
         this.onClickItemInterface = onClickItemInterface;
     }
+
 
 //    public void UpdatePictures(List<PictureItem> newPictures){
 //        pictures.clear();
