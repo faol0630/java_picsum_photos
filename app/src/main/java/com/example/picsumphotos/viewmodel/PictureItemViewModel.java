@@ -55,6 +55,11 @@ public class PictureItemViewModel extends AndroidViewModel {
 
     //aca no hay nada de Room porque toda la logica está en repository.
     //aca solo está lo que viene de Retrofit.
+
+    //--------------Room---------------
+    public void deleteAllRoomItems(){
+        repository.deleteAllRoomItems();
+    }
 }
 
 //AndroidViewModel porque se necesita pasar por parametro al context(application).

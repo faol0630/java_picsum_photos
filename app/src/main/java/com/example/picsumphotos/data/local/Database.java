@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase;
 
 import com.example.picsumphotos.data.model.PictureItemEntity;
 
-@androidx.room.Database(entities = {PictureItemEntity.class}, version = 2)
+@androidx.room.Database(entities = {PictureItemEntity.class}, version = 3)
 public abstract class Database extends RoomDatabase {
 
     //al ser abstracta no se necesita un private constructor

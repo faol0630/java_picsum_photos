@@ -16,6 +16,6 @@ public interface PicturesItemLocalDAO {
     @Insert(onConflict = REPLACE)
     void saveAllRoomPictureItems(List<PictureItemEntity> images);
 
-    @Query("SELECT * FROM picture_items")
+    @Query("SELECT * FROM picture_items_entity")
     List<PictureItemEntity> getAllRoomPictureItems();
 }

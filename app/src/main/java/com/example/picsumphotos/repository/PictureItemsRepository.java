@@ -10,7 +10,6 @@ import com.example.picsumphotos.data.model.PictureItemEntity;
 import com.example.picsumphotos.data.remote.RemoteDataAccess;
 import com.example.picsumphotos.repository.mapper.PictureItemDTOMapper;
 import com.example.picsumphotos.repository.mapper.PictureItemEntityMapper;
-import com.example.picsumphotos.viewmodel.ExecutorSupplier;
 
 import java.util.List;
 
@@ -33,15 +32,22 @@ public class PictureItemsRepository {
         this.dtoMapper = dtoMapper;
     }
 
+
     public void getPictureItems(AsyncTaskReceiver<List<PictureItem>> callback) {
 
-        //llamado de room:
+        //llamado de room:(esta funcion seria la que se llamaria para el recycler view de room)
         ExecutorSupplier.getInstance().execute(() -> {
             //lista del entity
+            //esto no puede estar por fuera de la funcion:
             List<PictureItemEntity> localItems = localStorage.getDAO().getAllRoomPictureItems();
             //En caso de conexion exitosa, del entity al neutro
             callback.onSuccess(entityMapper.toModel(localItems));
         });
+        //la solucion es llamar esto desde viewModel y en el activity details, llamar el metodo
+        //getOneItemToRoom y pasarle lo que está en los textView como partes del parametro(item)
+        //para hacer eso esta funcion debe estar por fuera de getPicturesItem y se debe quitar de
+        //abajo la parte en donde se salva en Room.(Linea 68 aprox)
+        //-----------------------------------------------------------------------------------
 
         //llamado a la lista del DTO remote
         Call<List<PictureItemDTO>> call = remote.getPicturesItemDAOFromRemoteDataAccess().getInterfacePictureItems();
@@ -52,11 +58,14 @@ public class PictureItemsRepository {
                 if (response.body() != null && !response.body().isEmpty()) {
 
                     //del DTO a neutro
+                    //esto no puede estar por fuera de la funcion:
                     List<PictureItem> items = dtoMapper.toModel(response.body());
 
                     callback.onSuccess(items); //del DTO al neutro
+
+                    //--------------------------------------------
+                    //salvar toda la info que viene de retrofit en Room:
                     ExecutorSupplier.getInstance().execute(() -> {
-                        //salvar toda la info que viene de retrofit en Room:
                         //convirtiendo de neutro a entity:
                         localStorage.getDAO().saveAllRoomPictureItems(entityMapper.fromModel(items)); //se deben salvar en modo Entity
                     });
@@ -72,6 +81,12 @@ public class PictureItemsRepository {
         });
 
 
+    }
+
+    //---------------Room-----------------------------
+    public void deleteAllRoomItems(){
+
+        ExecutorSupplier.getInstance().execute(localStorage::clearAllTables);
     }
 }
 

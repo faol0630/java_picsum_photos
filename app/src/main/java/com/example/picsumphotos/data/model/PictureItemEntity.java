@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 
 import org.jetbrains.annotations.NotNull;
 
-@Entity(tableName = "picture_items")
+@Entity(tableName = "picture_items_entity")
 public class PictureItemEntity {
 
     @PrimaryKey

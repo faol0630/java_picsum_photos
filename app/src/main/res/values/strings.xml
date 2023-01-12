@@ -8,4 +8,6 @@
     <string name="width">Width</string>
     <string name="author1">Author</string>
     <string name="id1">Id</string>
+    <string name="delete_local_db">Delete local DB</string>
+    <string name="reload_from_web">Reload from web</string>
 </resources>

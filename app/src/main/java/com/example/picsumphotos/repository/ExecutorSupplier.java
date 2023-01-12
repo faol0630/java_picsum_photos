@@ -1,4 +1,4 @@
-package com.example.picsumphotos.viewmodel;
+package com.example.picsumphotos.repository;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
