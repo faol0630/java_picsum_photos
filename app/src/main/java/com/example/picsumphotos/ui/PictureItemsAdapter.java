@@ -1,6 +1,5 @@
 package com.example.picsumphotos.ui;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,13 +39,6 @@ public class PictureItemsAdapter extends RecyclerView.Adapter<PictureItemsAdapte
         this.onClickItemInterface = onClickItemInterface;
     }
 
-
-//    public void UpdatePictures(List<PictureItem> newPictures){
-//        pictures.clear();
-//        pictures.addAll(newPictures);
-//        notifyDataSetChanged();
-//    }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -56,7 +48,6 @@ public class PictureItemsAdapter extends RecyclerView.Adapter<PictureItemsAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //holder.bind(pictures.get(position));
         holder.tvItemId.setText(pictures.get(position).getId());
         holder.tvItemAuthor.setText(pictures.get(position).getAuthor());
         Glide.with(holder.itemView.getContext()).
@@ -79,19 +70,16 @@ public class PictureItemsAdapter extends RecyclerView.Adapter<PictureItemsAdapte
 
         @BindView(R.id.TVItemId)
         TextView tvItemId;
-//
+
         @BindView(R.id.TVItemAuthor)
         TextView tvItemAuthor;
-//
+
         @BindView(R.id.IVitem)
         ImageView ivItem;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-//            tvItemId = itemView.findViewById(R.id.TVItemId);
-//            tvItemAuthor = itemView.findViewById(R.id.TVItemAuthor);
-//            ivItem = itemView.findViewById(R.id.IVitem);
         }
     }
 }

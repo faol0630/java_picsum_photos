@@ -1,6 +1,5 @@
 package com.example.picsumphotos.ui;
 
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
@@ -40,16 +40,20 @@ public class DetailsFragment extends Fragment {
 
     private Unbinder unbinder; //para liberar cuando se termina
 
+    //back arrow:
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setHasOptionsMenu(true);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.details_fragment, container, false);
         unbinder = ButterKnife.bind(this, view); //diferente a como se hace en activity
 
-        //back arrow:
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true); //esto solamente muestra la flecha
-
-        //Bundle bundle = getIntent().getExtras();
         Bundle bundle = getArguments();
 
         if (bundle != null) {
@@ -65,20 +69,19 @@ public class DetailsFragment extends Fragment {
         return view;
     }
 
-    //funcionalidad del back arrow:
-    //@Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        switch (item.getItemId()) {
-//            case android.R.id.home:
-//                finish();
-//                return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            getActivity().onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
     }
+
 }

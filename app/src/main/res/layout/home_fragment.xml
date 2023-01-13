@@ -6,13 +6,6 @@
     android:background="#212121"
     android:orientation="vertical">
 
-    <!--    <TextView-->
-    <!--        android:text="Home fragment"-->
-    <!--        android:textColor="#FAFAFA"-->
-    <!--        android:gravity="center"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"/>-->
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RVActivity"
         android:layout_width="match_parent"
