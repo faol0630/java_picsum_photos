@@ -13,6 +13,8 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -77,11 +79,16 @@ public class HomeFragment extends Fragment implements PictureItemsAdapter.OnClic
 
     @Override
     public void onClickItem(PictureItem pictureItem) {
-        //Intent intent = new Intent(HomeFragment, DetailsActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("pictureItem", pictureItem);
-        //intent.putExtras(bundle);
-        //startActivity(intent);
+        Fragment detailsFragment = new DetailsFragment();
+        detailsFragment.setArguments(bundle);
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentContainer, detailsFragment, "details_fragment")
+                .addToBackStack("details_fragment").commit();
+
+
     }
 
     @Override
@@ -89,5 +96,7 @@ public class HomeFragment extends Fragment implements PictureItemsAdapter.OnClic
         super.onDestroyView();
         unbinder.unbind();
     }
+
+
 
 }
