@@ -20,22 +20,13 @@ import com.example.picsumphotos.viewmodel.PictureItemViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
 public class HomeFragment extends Fragment implements PictureItemsAdapter.OnClickItemInterface {
 
-    @BindView(R.id.btnDeleteLocalDB)
     Button btnDeleteLocalDB;
 
-    @BindView(R.id.btnReload)
     Button btnReload;
 
-    @BindView(R.id.RVActivity)
     RecyclerView rvActivity;
-
-    private Unbinder unbinder; //para liberar cuando se termina
 
     private PictureItemViewModel pictureItemViewModel;
 
@@ -44,8 +35,16 @@ public class HomeFragment extends Fragment implements PictureItemsAdapter.OnClic
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.home_fragment, container, false);
-        unbinder = ButterKnife.bind(this, view); //diferente a como se hace en activity
+
+        return inflater.inflate(R.layout.home_fragment, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        btnDeleteLocalDB = (Button) requireView().findViewById(R.id.btnDeleteLocalDB);
+        btnReload = (Button) requireView().findViewById(R.id.btnReload);
+        rvActivity = (RecyclerView) requireView().findViewById(R.id.RVActivity);
 
         adapter = new PictureItemsAdapter(this);
 
@@ -54,9 +53,7 @@ public class HomeFragment extends Fragment implements PictureItemsAdapter.OnClic
 
         pictureItemViewModel = new ViewModelProvider(this).get(PictureItemViewModel.class);
 
-        pictureItemViewModel.getPicturesLiveData().observe(requireActivity(), pictureItems -> {
-            adapter.setPictures(pictureItems);
-        });
+        pictureItemViewModel.getPicturesLiveData().observe(requireActivity(), adapter::setPictures);
 
         pictureItemViewModel.requestPictureItems();
 
@@ -67,8 +64,6 @@ public class HomeFragment extends Fragment implements PictureItemsAdapter.OnClic
         });
 
         btnReload.setOnClickListener(v -> pictureItemViewModel.requestPictureItems());
-
-        return view;//esta linea dejarla de ultima para que el adapter acepte el parametro this.
     }
 
     @Override
@@ -77,18 +72,12 @@ public class HomeFragment extends Fragment implements PictureItemsAdapter.OnClic
         bundle.putSerializable("pictureItem", pictureItem);
         Fragment detailsFragment = new DetailsFragment();
         detailsFragment.setArguments(bundle);
-        getFragmentManager()
+        requireActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragmentContainer, detailsFragment, "details_fragment")
                 .addToBackStack("details_fragment").commit();
 
 
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
     }
 
 }

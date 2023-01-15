@@ -17,42 +17,39 @@ import com.bumptech.glide.Glide;
 import com.example.picsumphotos.R;
 import com.example.picsumphotos.data.model.PictureItem;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+import java.util.Objects;
+
 
 public class DetailsFragment extends Fragment {
 
-    @BindView(R.id.ivDetails)
     ImageView ivDetails;
 
-    @BindView(R.id.tvDetailsId)
     TextView tvDetailsId;
 
-    @BindView(R.id.tvDetailsAuthor)
     TextView tvDetailsAuthor;
 
-    @BindView(R.id.tvDetailsWidth)
     TextView tvDetailsWidth;
 
-    @BindView(R.id.tvDetailsHeight)
     TextView tvDetailsHeight;
-
-    private Unbinder unbinder; //para liberar cuando se termina
-
-    //back arrow:
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setHasOptionsMenu(true);
-    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.details_fragment, container, false);
-        unbinder = ButterKnife.bind(this, view); //diferente a como se hace en activity
+        return inflater.inflate(R.layout.details_fragment, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        //back arrow:
+        super.onViewCreated(view, savedInstanceState);
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        setHasOptionsMenu(true);
+
+        ivDetails = (ImageView) requireView().findViewById(R.id.ivDetails);
+        tvDetailsId = (TextView) requireView().findViewById(R.id.tvDetailsId);
+        tvDetailsAuthor = (TextView) requireView().findViewById(R.id.tvDetailsAuthor);
+        tvDetailsWidth = (TextView) requireView().findViewById(R.id.tvDetailsWidth);
+        tvDetailsHeight = (TextView) requireView().findViewById(R.id.tvDetailsHeight);
 
         Bundle bundle = getArguments();
 
@@ -60,28 +57,20 @@ public class DetailsFragment extends Fragment {
             PictureItem pictureItem = (PictureItem) bundle.getSerializable("pictureItem");
             tvDetailsId.setText(pictureItem.getId());
             tvDetailsAuthor.setText(pictureItem.getAuthor());
-            tvDetailsWidth.setText(String.valueOf(pictureItem.getWidth())); //parseo de int a String
+            tvDetailsWidth.setText(String.valueOf(pictureItem.getWidth()));
             tvDetailsHeight.setText(String.valueOf(pictureItem.getHeight()));
-            Glide.with(getContext()).
+            Glide.with(requireContext()).
                     load(pictureItem.getImage_url()).into(ivDetails);
         }
-
-        return view;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            getActivity().onBackPressed();
+            requireActivity().onBackPressed();
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
     }
 
 }

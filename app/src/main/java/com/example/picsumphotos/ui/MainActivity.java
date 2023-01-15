@@ -10,13 +10,8 @@ import android.widget.FrameLayout;
 
 import com.example.picsumphotos.R;
 
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.fragmentContainer)
     FrameLayout fragmentContainer;
 
     @Override
@@ -24,13 +19,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        openFragment(new HomeFragment()); //para que se abra el homeFragment apenas se abra la app
+        fragmentContainer = (FrameLayout) findViewById(R.id.fragmentContainer);
 
-        ButterKnife.bind(this);
+        openFragment(new HomeFragment());
 
     }
 
-    //inflar el fragment en este activity:
     private void openFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

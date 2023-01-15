@@ -1,5 +1,6 @@
 package com.example.picsumphotos.ui;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +17,10 @@ import com.example.picsumphotos.data.model.PictureItem;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
-//usar aca el modelo neutro(PictureItem).No entity ni DTO.
-
 public class PictureItemsAdapter extends RecyclerView.Adapter<PictureItemsAdapter.ViewHolder> {
 
     private List<PictureItem> pictures = new ArrayList<>();
+
     //-------------------------------------------------------------
     private final OnClickItemInterface onClickItemInterface;
 
@@ -52,7 +49,7 @@ public class PictureItemsAdapter extends RecyclerView.Adapter<PictureItemsAdapte
         holder.tvItemAuthor.setText(pictures.get(position).getAuthor());
         Glide.with(holder.itemView.getContext()).
                 load(pictures.get(position).getImage_url()).into(holder.ivItem);
-        //click en cada item del recyclerView
+        //click on each item of the recyclerView
         holder.itemView.getRootView().setOnClickListener(v -> onClickItemInterface.onClickItem(pictures.get(position)));
     }
 
@@ -61,6 +58,7 @@ public class PictureItemsAdapter extends RecyclerView.Adapter<PictureItemsAdapte
         return pictures.size();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setPictures(List<PictureItem> pictures){
         this.pictures = pictures;
         notifyDataSetChanged();
@@ -68,18 +66,18 @@ public class PictureItemsAdapter extends RecyclerView.Adapter<PictureItemsAdapte
 
     static class ViewHolder extends RecyclerView.ViewHolder{
 
-        @BindView(R.id.TVItemId)
         TextView tvItemId;
 
-        @BindView(R.id.TVItemAuthor)
         TextView tvItemAuthor;
 
-        @BindView(R.id.IVitem)
         ImageView ivItem;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            tvItemId = itemView.findViewById(R.id.TVItemId);
+            tvItemAuthor = itemView.findViewById(R.id.TVItemAuthor);
+            ivItem = itemView.findViewById(R.id.IVitem);
+
         }
     }
 }
