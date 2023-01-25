@@ -2,7 +2,6 @@ package com.example.picsumphotos.data.remote;
 
 public class RemoteDataAccess {
 
-    //singleton
     private static final RemoteDataAccess remoteDataInstance = new RemoteDataAccess();
 
     //private constructor

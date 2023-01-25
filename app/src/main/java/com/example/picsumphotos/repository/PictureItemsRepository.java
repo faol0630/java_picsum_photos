@@ -35,21 +35,17 @@ public class PictureItemsRepository {
 
     public void getPictureItems(AsyncTaskReceiver<List<PictureItem>> callback) {
 
-        //llamado de room:(esta funcion seria la que se llamaria para el recycler view de room)
+        //Room
         ExecutorSupplier.getInstance().execute(() -> {
-            //lista del entity
-            //esto no puede estar por fuera de la funcion:
+
             List<PictureItemEntity> localItems = localStorage.getDAO().getAllRoomPictureItems();
-            //En caso de conexion exitosa, del entity al neutro
+
             callback.onSuccess(entityMapper.toModel(localItems));
         });
-        //la solucion es llamar esto desde viewModel y en el activity details, llamar el metodo
-        //getOneItemToRoom y pasarle lo que está en los textView como partes del parametro(item)
-        //para hacer eso esta funcion debe estar por fuera de getPicturesItem y se debe quitar de
-        //abajo la parte en donde se salva en Room.(Linea 68 aprox)
+
         //-----------------------------------------------------------------------------------
 
-        //llamado a la lista del DTO remote
+        //DTO remote
         Call<List<PictureItemDTO>> call = remote.getPicturesItemDAOFromRemoteDataAccess().getInterfacePictureItems();
 
         call.enqueue(new Callback<List<PictureItemDTO>>() {
@@ -57,16 +53,15 @@ public class PictureItemsRepository {
             public void onResponse(@NonNull Call<List<PictureItemDTO>> call, @NonNull Response<List<PictureItemDTO>> response) {
                 if (response.body() != null && !response.body().isEmpty()) {
 
-                    //del DTO a neutro
-                    //esto no puede estar por fuera de la funcion:
+                    //using mapper:
                     List<PictureItem> items = dtoMapper.toModel(response.body());
 
-                    callback.onSuccess(items); //del DTO al neutro
+                    callback.onSuccess(items);
 
                     //--------------------------------------------
-                    //salvar toda la info que viene de retrofit en Room:
+                    //save all the info coming from retrofit inside Room:
                     ExecutorSupplier.getInstance().execute(() -> {
-                        //convirtiendo de neutro a entity:
+
                         localStorage.getDAO().saveAllRoomPictureItems(entityMapper.fromModel(items)); //se deben salvar en modo Entity
                     });
 
@@ -90,9 +85,3 @@ public class PictureItemsRepository {
     }
 }
 
-//la primera vez que se descarga pone todos los items en Room(linea 48aprox)
-//la segunda vez que se abra si no hay internet , igual muestra toda la info debido a que ya la habia
-//guardado en Room la primera vez.
-
-//executor impide que se abran mas de 4 hilos.si en algun momento se tienen abiertos 4 hilos
-//y se necesita abrir otro, el va a esperar a que uno de los 4 este disponible.

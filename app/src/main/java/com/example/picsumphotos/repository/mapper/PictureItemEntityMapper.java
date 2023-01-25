@@ -28,7 +28,7 @@ public class PictureItemEntityMapper implements ObjectMapper<PictureItemEntity, 
         return new PictureItemEntity(object.getId(), object.getAuthor(), object.getImage_url(), object.getWidth(), object.getHeight()) ;
     }
 
-    //minimo tener minSdk 24 para lo siguiente:
+    //minimum minSdk 24:
     @Override
     public List<PictureItemEntity> fromModel(List<PictureItem> object) {
         return object.stream().map(this::fromModel).collect(Collectors.toList());

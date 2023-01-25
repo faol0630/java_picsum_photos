@@ -37,9 +37,8 @@ public class PictureItemViewModel extends AndroidViewModel {
         return itemLiveData;
     }
 
-    public void requestPictureItems(){ //este es el metodo que se llama dentro de onCreate en el activity
-        //dentro del getPicturesItems de repository está room incluido.Por lo tanto con este llamado
-        //se llaman las dos cosas.Por eso aca no hay logica de Room.
+    public void requestPictureItems(){
+
         repository.getPictureItems(new AsyncTaskReceiver<List<PictureItem>>() {
             @Override
             public void onSuccess(List<PictureItem> result) {
@@ -53,19 +52,12 @@ public class PictureItemViewModel extends AndroidViewModel {
         });
     }
 
-    //aca no hay nada de Room porque toda la logica está en repository.
-    //aca solo está lo que viene de Retrofit.
-
     //--------------Room---------------
     public void deleteAllRoomItems(){
         repository.deleteAllRoomItems();
     }
 }
 
-//AndroidViewModel porque se necesita pasar por parametro al context(application).
+//AndroidViewModel because you need to pass the context(application) by parameter.
 
-//en el activity con el viewModel hay 4 movimientos:
-    //* declarar el viewModel por fuera de onCreate sin instanciar
-    //* instanciar viewModel dentro de onCreate
-    //* crear el observer
-    //* llamar el metodo(en este caso esta puesto dentro del onCLik del botton load)
+

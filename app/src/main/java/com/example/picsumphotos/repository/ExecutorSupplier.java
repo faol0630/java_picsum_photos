@@ -16,4 +16,4 @@ public class ExecutorSupplier {
     }
 }
 
-//executor para que no se abran mas de 4 hilos.limita la cantidad de hilos a maximo 4.
+//executor limits the number of threads to 4.

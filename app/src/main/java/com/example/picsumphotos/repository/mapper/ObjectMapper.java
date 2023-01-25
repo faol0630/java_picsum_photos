@@ -8,5 +8,5 @@ public interface ObjectMapper<T, Model> {
     List<T> fromModel(List<Model> object);
     List<Model> toModel(List<T> object);
 }
-//T puede ser el entity de room o el DTO de retrofit
-//model viene siendo PictureItem(ni entity ni DTO)
+//T can be the entity of room or the DTO of retrofit
+//model: PictureItem
